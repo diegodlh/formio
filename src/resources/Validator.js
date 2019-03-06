@@ -908,7 +908,7 @@ class Validator {
     }
 
     if (submission.data.draft) {
-      submission.data.submit = false
+      submission.data.submit = false;
       return next(null, submission.data);
     }
 
