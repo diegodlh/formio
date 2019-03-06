@@ -907,6 +907,11 @@ class Validator {
       return next();
     }
 
+    if (submission.data.draft) {
+      submission.data.submit = false
+      return next(null, submission.data);
+    }
+
     // Build the JoiX validation schema.
     let schema = {
       // Start off with the _id key.
