@@ -2264,7 +2264,7 @@
           "properties": {},
           "validate": {
             "minLength": 1,
-            "custom": "var errors = []\nif (!data.integrantes.map(a => a.integrante).includes('1')) {\n    errors.push('Lx encuestadx debe ser unx de lxs integrantes');\n}\nif (errors.length>0) {\n    valid = errors.join('\\n');\n} else {\n    valid = true;\n}",
+            "custom": "",
             "maxLength": ""
           },
           "addAnother": "Agregar otrx integrante",
@@ -3254,7 +3254,7 @@
           },
           {
             "value": "ns",
-            "label": "3 No sabe/No contesta"
+            "label": "99 No sabe/No contesta"
           }
         ],
         "json": "",
@@ -3647,7 +3647,7 @@
                 "eq": ""
               },
               "properties": {},
-              "customConditional": "",
+              "customConditional": "show = data.cursoRealizo == 'si'",
               "lockKey": true
             }
           ],
@@ -3661,7 +3661,7 @@
           },
           "properties": {},
           "lockKey": true,
-          "customConditional": "show = data.politcasConoce == 'si'",
+          "customConditional": "show = data.politicasConoce == 'si'",
           "hideLabel": false
         }
       ],
@@ -4461,7 +4461,8 @@
           "value": "",
           "clearOnHide": true,
           "validate": {
-            "required": false
+            "required": false,
+            "custom": ""
           },
           "type": "checkbox",
           "labelPosition": "right",
@@ -4592,7 +4593,7 @@
                   "clearOnHide": true,
                   "validate": {
                     "required": true,
-                    "custom": "",
+                    "custom": "valid = input == 'no' && data.intervenciones.every(a => a.intervencionRealizacion == 'no') ? 'Si no realizó ninguna intervención, use la opción 8' : true;",
                     "customPrivate": false
                   },
                   "type": "radio",
@@ -4828,7 +4829,8 @@
                   "labelWidth": 30,
                   "labelMargin": 3,
                   "lockKey": true,
-                  "disabled": true
+                  "disabled": true,
+                  "isNew": false
                 },
                 {
                   "autofocus": false,
@@ -5097,7 +5099,7 @@
               "clearOnHide": true,
               "validate": {
                 "required": true,
-                "custom": "valid = input=='10' || data.noModificaMotivos.map(a=>a.noModificaMotivo=='input').length == 1 ? true : 'Este motivo ya fue incluido'"
+                "custom": "valid = input == '10' || data.noModificaMotivos.filter(a => a.noModificaMotivo == input).length == 1 ? true : 'Este motivo ya fue incluido'"
               },
               "type": "select",
               "inDataGrid": true,
@@ -5109,7 +5111,8 @@
                 "eq": ""
               },
               "properties": {},
-              "lockKey": true
+              "lockKey": true,
+              "isNew": false
             },
             {
               "autofocus": false,
@@ -5225,7 +5228,8 @@
           "validate": {
             "minLength": 1
           },
-          "customConditional": "show = !data.noModificaMotivosNS"
+          "customConditional": "show = !data.noModificaMotivosNS",
+          "isNew": false
         }
       ],
       "type": "panel",
@@ -5239,7 +5243,8 @@
       },
       "properties": {},
       "customConditional": "show = data.sinModificaciones",
-      "lockKey": true
+      "lockKey": true,
+      "isNew": false
     },
     {
       "key": "situacionesSeccion",
@@ -7862,8 +7867,7 @@
                 "when": null,
                 "eq": ""
               },
-              "properties": {},
-              "isNew": false
+              "properties": {}
             }
           ],
           "width": 6,
