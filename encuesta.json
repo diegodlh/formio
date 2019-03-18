@@ -291,7 +291,7 @@
           "tags": [],
           "conditional": {
             "show": "",
-            "when": "partido",
+            "when": null,
             "eq": ""
           },
           "properties": {},
@@ -465,9 +465,9 @@
             "customPrivate": false
           },
           "conditional": {
-            "show": "true",
-            "when": "Culessuidentidaddegnero",
-            "eq": "'8'"
+            "show": "",
+            "when": null,
+            "eq": ""
           },
           "type": "textfield",
           "labelPosition": "top",
@@ -1162,7 +1162,7 @@
               "tags": [],
               "conditional": {
                 "show": "",
-                "when": "partido",
+                "when": null,
                 "eq": ""
               },
               "properties": {},
@@ -1303,7 +1303,7 @@
           "tags": [],
           "conditional": {
             "show": "",
-            "when": "partido",
+            "when": null,
             "eq": ""
           },
           "properties": {},
