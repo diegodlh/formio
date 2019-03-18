@@ -5048,7 +5048,8 @@
                   "labelWidth": 30,
                   "labelMargin": 3,
                   "lockKey": true,
-                  "disabled": true
+                  "disabled": true,
+                  "isNew": false
                 },
                 {
                   "autofocus": false,
@@ -5329,7 +5330,8 @@
                 "eq": ""
               },
               "properties": {},
-              "lockKey": true
+              "lockKey": true,
+              "isNew": false
             },
             {
               "autofocus": false,
@@ -5445,7 +5447,8 @@
           "validate": {
             "minLength": 1
           },
-          "customConditional": "show = !data.noModificaMotivosNS"
+          "customConditional": "show = !data.noModificaMotivosNS",
+          "isNew": false
         }
       ],
       "type": "panel",
@@ -5459,7 +5462,8 @@
       },
       "properties": {},
       "customConditional": "show = data.sinModificaciones",
-      "lockKey": true
+      "lockKey": true,
+      "isNew": false
     },
     {
       "key": "situacionesSeccion",
