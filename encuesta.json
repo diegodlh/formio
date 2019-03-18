@@ -362,12 +362,43 @@
           "data": {
             "values": [
               {
-                "value": "",
-                "label": ""
+                "value": "1",
+                "label": "Travesti"
+              },
+              {
+                "value": "2",
+                "label": "Transexual"
+              },
+              {
+                "value": "3",
+                "label": "Mujer trans"
+              },
+              {
+                "value": "4",
+                "label": "Varón trans"
+              },
+              {
+                "value": "5",
+                "label": "Hombre Trans"
+              },
+              {
+                "value": "6",
+                "label": "Transgénero"
+              },
+              {
+                "value": "7",
+                "label": "Trans no binarix"
+              },
+              {
+                "value": "8",
+                "label": "Otra"
+              },
+              {
+                "value": "99",
+                "label": "No sabe/No contesta"
               }
             ],
-            "json": "",
-            "url": "http://spreadsheets.google.com/feeds/list/1p6pW92zeU2cE2Eblm-b1Iv9_eleP0Bd0XF-PUufw_GQ/1/public/basic?alt=json",
+            "url": "",
             "resource": "",
             "custom": "",
             "headers": [
@@ -376,15 +407,15 @@
                 "key": ""
               }
             ],
-            "disableLimit": true
+            "disableLimit": false
           },
-          "dataSrc": "url",
-          "valueProperty": "title.$t",
+          "dataSrc": "values",
+          "valueProperty": "",
           "defaultValue": "",
           "refreshOn": "",
           "filter": "",
           "authenticate": false,
-          "template": "<span>{{ item.title.$t }} {{ item.content.$t.split(': ')[1] }}</span>",
+          "template": "<span>{{item.value}} {{ item.label }}</span>",
           "multiple": false,
           "protected": false,
           "unique": false,
@@ -403,7 +434,7 @@
             "eq": ""
           },
           "properties": {},
-          "selectValues": "feed.entry",
+          "selectValues": "",
           "lockKey": true
         },
         {
@@ -445,6 +476,50 @@
           "properties": {},
           "lockKey": true,
           "customConditional": "show = data.identidad == '8'"
+        },
+        {
+          "autofocus": false,
+          "input": true,
+          "tableView": false,
+          "inputType": "radio",
+          "label": "Travesti/Transexual/Transgénero",
+          "key": "identidadSub",
+          "values": [
+            {
+              "value": "f",
+              "label": "F",
+              "shortcut": ""
+            },
+            {
+              "value": "m",
+              "label": "M",
+              "shortcut": ""
+            }
+          ],
+          "defaultValue": "",
+          "protected": false,
+          "fieldSet": false,
+          "persistent": true,
+          "hidden": false,
+          "clearOnHide": true,
+          "validate": {
+            "required": true,
+            "custom": "",
+            "customPrivate": false
+          },
+          "type": "radio",
+          "labelPosition": "top",
+          "optionsLabelPosition": "right",
+          "tags": [],
+          "conditional": {
+            "show": "",
+            "when": null,
+            "eq": ""
+          },
+          "properties": {},
+          "inline": true,
+          "lockKey": true,
+          "customConditional": "show = ['1', '2', '6'].includes(data.identidad)"
         }
       ],
       "type": "panel",
@@ -1180,6 +1255,95 @@
           "properties": {},
           "lockKey": true,
           "customConditional": "show = data.nacimientoProvinciaArg != 'Ciudad Autónoma de Buenos Aires'"
+        },
+        {
+          "autofocus": false,
+          "input": true,
+          "tableView": false,
+          "label": "Barrio (CABA)",
+          "key": "nacimientoBarrioCABA",
+          "placeholder": "",
+          "data": {
+            "values": [
+              {
+                "value": "",
+                "label": ""
+              }
+            ],
+            "json": "",
+            "url": "https://apis.datos.gob.ar/georef/api/localidades?",
+            "resource": "",
+            "custom": "",
+            "headers": [
+              {
+                "value": "",
+                "key": ""
+              }
+            ],
+            "disableLimit": true
+          },
+          "dataSrc": "url",
+          "valueProperty": "nombre",
+          "defaultValue": "",
+          "refreshOn": "nacimientoProvinciaArg",
+          "filter": "max=1000&provincia=Ciudad Autónoma de Buenos Aires",
+          "authenticate": false,
+          "template": "<span>{{ item.nombre }}</span>",
+          "multiple": false,
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "hidden": false,
+          "clearOnHide": true,
+          "validate": {
+            "required": true
+          },
+          "type": "select",
+          "labelPosition": "top",
+          "tags": [],
+          "conditional": {
+            "show": "",
+            "when": "partido",
+            "eq": ""
+          },
+          "properties": {},
+          "selectValues": "localidades",
+          "limit": "",
+          "clearOnRefresh": true,
+          "lockKey": true,
+          "customConditional": "show = data.nacimientoProvinciaArg == 'Ciudad Autónoma de Buenos Aires' && !data.nacimientoBarrioNS"
+        },
+        {
+          "autofocus": false,
+          "input": true,
+          "inputType": "checkbox",
+          "tableView": false,
+          "label": "Barrio: No sabe/No contesta",
+          "dataGridLabel": false,
+          "key": "nacimientoBarrioNS",
+          "defaultValue": false,
+          "protected": false,
+          "persistent": true,
+          "hidden": false,
+          "name": "",
+          "value": "",
+          "clearOnHide": true,
+          "validate": {
+            "required": false
+          },
+          "type": "checkbox",
+          "labelPosition": "right",
+          "tags": [],
+          "conditional": {
+            "show": "",
+            "when": null,
+            "eq": ""
+          },
+          "properties": {},
+          "lockKey": true,
+          "hideLabel": false,
+          "customConditional": "show = data.nacimientoProvinciaArg == 'Ciudad Autónoma de Buenos Aires'",
+          "isNew": false
         }
       ],
       "type": "panel",
@@ -2264,7 +2428,7 @@
           "properties": {},
           "validate": {
             "minLength": 1,
-            "custom": "var errors = []\nif (!data.integrantes.map(a => a.integrante).includes('1')) {\n    errors.push('Lx encuestadx debe ser unx de lxs integrantes');\n}\nif (errors.length>0) {\n    valid = errors.join('\\n');\n} else {\n    valid = true;\n}",
+            "custom": "",
             "maxLength": ""
           },
           "addAnother": "Agregar otrx integrante",
@@ -2296,15 +2460,15 @@
         "values": [
           {
             "value": "si",
-            "label": "Sí"
+            "label": "1 Sí"
           },
           {
             "value": "no",
-            "label": "No"
+            "label": "2 No"
           },
           {
             "value": "ns",
-            "label": "No sabe/No contesta"
+            "label": "99 No sabe/No contesta"
           }
         ],
         "json": "",
@@ -3047,120 +3211,235 @@
       "clearOnHide": false,
       "key": "ingresosPanel",
       "input": false,
-      "title": "",
+      "title": "4.3-4.4 Si está ocupado...",
       "theme": "default",
       "tableView": false,
       "components": [
         {
           "autofocus": false,
           "input": true,
+          "inputType": "checkbox",
           "tableView": false,
-          "label": "4.3 Si está ocupadx, ¿Qué tipo de ocupación tiene?",
-          "key": "ingresos",
-          "placeholder": "",
-          "data": {
-            "values": [
-              {
-                "value": "1",
-                "label": "Trabajo estable"
-              },
-              {
-                "value": "2",
-                "label": "Trabajo por un tiempo determinado"
-              },
-              {
-                "value": "3",
-                "label": "Cobro de asignaciones por políticas sociales"
-              },
-              {
-                "value": "4",
-                "label": "Jubilaciones/Pensiones"
-              },
-              {
-                "value": "5",
-                "label": "Seguro de Desempleo"
-              },
-              {
-                "value": "6",
-                "label": "Otros"
-              },
-              {
-                "value": "99",
-                "label": "No sabe/No contesta"
-              }
-            ],
-            "json": "",
-            "url": "",
-            "resource": "",
+          "label": "No estoy ocupado",
+          "dataGridLabel": false,
+          "key": "sinOcupacion",
+          "defaultValue": false,
+          "protected": false,
+          "persistent": true,
+          "hidden": false,
+          "name": "",
+          "value": "",
+          "clearOnHide": true,
+          "validate": {
+            "required": false,
             "custom": ""
           },
-          "dataSrc": "values",
-          "valueProperty": "",
-          "defaultValue": "",
-          "refreshOn": "",
-          "filter": "",
-          "authenticate": false,
-          "template": "<span>{{item.value}} {{ item.label }}</span>",
-          "multiple": true,
-          "protected": false,
-          "unique": false,
-          "persistent": true,
-          "hidden": false,
-          "clearOnHide": true,
-          "validate": {
-            "required": true,
-            "custom": "valid = !input.includes('99') || input.length == 1 ? true : 'Si elige 99: No sabe/No contesta, no puede elegir otra opción'"
-          },
-          "type": "select",
-          "labelPosition": "top",
+          "type": "checkbox",
+          "labelPosition": "right",
           "tags": [],
           "conditional": {
             "show": "",
             "when": null,
             "eq": ""
           },
-          "properties": {},
-          "lockKey": true
-        },
-        {
-          "autofocus": false,
-          "input": true,
-          "tableView": false,
-          "inputType": "text",
-          "inputMask": "",
-          "label": "Otros ingresos",
-          "key": "ingresosOtros",
-          "placeholder": "",
-          "prefix": "",
-          "suffix": "",
-          "multiple": false,
-          "defaultValue": "",
-          "protected": false,
-          "unique": false,
-          "persistent": true,
-          "hidden": false,
-          "clearOnHide": true,
-          "spellcheck": true,
-          "validate": {
-            "required": true,
-            "minLength": 1,
-            "maxLength": "",
-            "pattern": "",
-            "custom": "",
-            "customPrivate": false
-          },
-          "conditional": {
-            "show": "",
-            "when": null,
-            "eq": ""
-          },
-          "type": "textfield",
-          "labelPosition": "top",
-          "inputFormat": "plain",
-          "tags": [],
           "properties": {},
           "lockKey": true,
-          "customConditional": "show = data.ingresos.includes('6')"
+          "hideLabel": false,
+          "customConditional": "show = data.remuneradasRealiza != 'si'"
+        },
+        {
+          "clearOnHide": false,
+          "key": "ingresosSubPanel",
+          "input": false,
+          "title": "",
+          "theme": "default",
+          "tableView": false,
+          "components": [
+            {
+              "autofocus": false,
+              "input": true,
+              "tableView": false,
+              "label": "4.3 Si está ocupadx, ¿Qué tipo de ocupación tiene?",
+              "key": "ingresos",
+              "placeholder": "",
+              "data": {
+                "values": [
+                  {
+                    "value": "1",
+                    "label": "Trabajo estable"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Trabajo por un tiempo determinado"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Cobro de asignaciones por políticas sociales"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Jubilaciones/Pensiones"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Seguro de Desempleo"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Otros"
+                  },
+                  {
+                    "value": "99",
+                    "label": "No sabe/No contesta"
+                  }
+                ],
+                "json": "",
+                "url": "",
+                "resource": "",
+                "custom": ""
+              },
+              "dataSrc": "values",
+              "valueProperty": "",
+              "defaultValue": "",
+              "refreshOn": "",
+              "filter": "",
+              "authenticate": false,
+              "template": "<span>{{item.value}} {{ item.label }}</span>",
+              "multiple": true,
+              "protected": false,
+              "unique": false,
+              "persistent": true,
+              "hidden": false,
+              "clearOnHide": true,
+              "validate": {
+                "required": true,
+                "custom": "valid = !input.includes('99') || input.length == 1 ? true : 'Si elige 99: No sabe/No contesta, no puede elegir otra opción'"
+              },
+              "type": "select",
+              "labelPosition": "top",
+              "tags": [],
+              "conditional": {
+                "show": "",
+                "when": null,
+                "eq": ""
+              },
+              "properties": {},
+              "lockKey": true,
+              "customConditional": ""
+            },
+            {
+              "autofocus": false,
+              "input": true,
+              "tableView": false,
+              "inputType": "text",
+              "inputMask": "",
+              "label": "Otros ingresos",
+              "key": "ingresosOtros",
+              "placeholder": "",
+              "prefix": "",
+              "suffix": "",
+              "multiple": false,
+              "defaultValue": "",
+              "protected": false,
+              "unique": false,
+              "persistent": true,
+              "hidden": false,
+              "clearOnHide": true,
+              "spellcheck": true,
+              "validate": {
+                "required": true,
+                "minLength": 1,
+                "maxLength": "",
+                "pattern": "",
+                "custom": "",
+                "customPrivate": false
+              },
+              "conditional": {
+                "show": "",
+                "when": null,
+                "eq": ""
+              },
+              "type": "textfield",
+              "labelPosition": "top",
+              "inputFormat": "plain",
+              "tags": [],
+              "properties": {},
+              "lockKey": true,
+              "customConditional": "show = data.ingresos.includes('6')"
+            },
+            {
+              "autofocus": false,
+              "input": true,
+              "tableView": false,
+              "label": "4.4 A partir de la ocupación que le brinda ingresos, ¿recibe...?",
+              "key": "remuneradasBeneficios",
+              "placeholder": "",
+              "data": {
+                "values": [
+                  {
+                    "value": "1",
+                    "label": "Aportes jubilatorios"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Obra social"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Ninguna de las dos"
+                  },
+                  {
+                    "value": "99",
+                    "label": "No sabe/No contesta"
+                  }
+                ],
+                "json": "",
+                "url": "",
+                "resource": "",
+                "custom": ""
+              },
+              "dataSrc": "values",
+              "valueProperty": "",
+              "defaultValue": "",
+              "refreshOn": "",
+              "filter": "",
+              "authenticate": false,
+              "template": "<span>{{item.value}} {{ item.label }}</span>",
+              "multiple": true,
+              "protected": false,
+              "unique": false,
+              "persistent": true,
+              "hidden": false,
+              "clearOnHide": true,
+              "validate": {
+                "required": true,
+                "custom": "valid = input.some(a=>['3','99'].includes(a)) && input.length > 1 ? 'Si elige 3: Ninguna de las dos, o 99: No sabe/No contesta, no puede elegir otra opción' : true;"
+              },
+              "type": "select",
+              "labelPosition": "top",
+              "tags": [],
+              "conditional": {
+                "show": "",
+                "when": null,
+                "eq": ""
+              },
+              "properties": {},
+              "lockKey": true,
+              "customConditional": ""
+            }
+          ],
+          "type": "panel",
+          "breadcrumb": "default",
+          "hideLabel": false,
+          "tags": [],
+          "conditional": {
+            "show": "",
+            "when": null,
+            "eq": ""
+          },
+          "properties": {},
+          "lockKey": true,
+          "customConditional": "show = !data.sinOcupacion"
         }
       ],
       "type": "panel",
@@ -3174,66 +3453,6 @@
       "properties": {},
       "lockKey": true,
       "hideLabel": false
-    },
-    {
-      "autofocus": false,
-      "input": true,
-      "tableView": false,
-      "label": "4.4 A partir de la ocupación que le brinda ingresos, ¿recibe...?",
-      "key": "remuneradasBeneficios",
-      "placeholder": "",
-      "data": {
-        "values": [
-          {
-            "value": "1",
-            "label": "Aportes jubilatorios"
-          },
-          {
-            "value": "2",
-            "label": "Obra social"
-          },
-          {
-            "value": "3",
-            "label": "Ninguna de las dos"
-          },
-          {
-            "value": "99",
-            "label": "No sabe/No contesta"
-          }
-        ],
-        "json": "",
-        "url": "",
-        "resource": "",
-        "custom": ""
-      },
-      "dataSrc": "values",
-      "valueProperty": "",
-      "defaultValue": "",
-      "refreshOn": "",
-      "filter": "",
-      "authenticate": false,
-      "template": "<span>{{item.value}} {{ item.label }}</span>",
-      "multiple": true,
-      "protected": false,
-      "unique": false,
-      "persistent": true,
-      "hidden": false,
-      "clearOnHide": true,
-      "validate": {
-        "required": true,
-        "custom": "valid = input.some(a=>['3','99'].includes(a)) && input.length > 1 ? 'Si elige 3: Ninguna de las dos, o 99: No sabe/No contesta, no puede elegir otra opción' : true;"
-      },
-      "type": "select",
-      "labelPosition": "top",
-      "tags": [],
-      "conditional": {
-        "show": "",
-        "when": null,
-        "eq": ""
-      },
-      "properties": {},
-      "lockKey": true,
-      "customConditional": "show = data.remuneradasRealiza == 'si'"
     },
     {
       "autofocus": false,
@@ -3254,7 +3473,7 @@
           },
           {
             "value": "ns",
-            "label": "3 No sabe/No contesta"
+            "label": "99 No sabe/No contesta"
           }
         ],
         "json": "",
@@ -3647,7 +3866,7 @@
                 "eq": ""
               },
               "properties": {},
-              "customConditional": "",
+              "customConditional": "show = data.cursoRealizo == 'si'",
               "lockKey": true
             }
           ],
@@ -3661,7 +3880,7 @@
           },
           "properties": {},
           "lockKey": true,
-          "customConditional": "show = data.politcasConoce == 'si'",
+          "customConditional": "show = data.politicasConoce == 'si'",
           "hideLabel": false
         }
       ],
@@ -4461,7 +4680,8 @@
           "value": "",
           "clearOnHide": true,
           "validate": {
-            "required": false
+            "required": false,
+            "custom": ""
           },
           "type": "checkbox",
           "labelPosition": "right",
@@ -4592,7 +4812,7 @@
                   "clearOnHide": true,
                   "validate": {
                     "required": true,
-                    "custom": "",
+                    "custom": "valid = input == 'no' && data.intervenciones.every(a => a.intervencionRealizacion == 'no') ? 'Si no realizó ninguna intervención, use la opción 8' : true;",
                     "customPrivate": false
                   },
                   "type": "radio",
@@ -5097,7 +5317,7 @@
               "clearOnHide": true,
               "validate": {
                 "required": true,
-                "custom": "valid = input=='10' || data.noModificaMotivos.map(a=>a.noModificaMotivo=='input').length == 1 ? true : 'Este motivo ya fue incluido'"
+                "custom": "valid = input == '10' || data.noModificaMotivos.filter(a => a.noModificaMotivo == input).length == 1 ? true : 'Este motivo ya fue incluido'"
               },
               "type": "select",
               "inDataGrid": true,
@@ -7862,8 +8082,7 @@
                 "when": null,
                 "eq": ""
               },
-              "properties": {},
-              "isNew": false
+              "properties": {}
             }
           ],
           "width": 6,
