@@ -3810,6 +3810,37 @@
             {
               "autofocus": false,
               "input": true,
+              "inputType": "checkbox",
+              "tableView": false,
+              "label": "Sin ordenar",
+              "dataGridLabel": false,
+              "key": "consultaEspaciosSinOrdenar",
+              "defaultValue": false,
+              "protected": false,
+              "persistent": true,
+              "hidden": false,
+              "name": "",
+              "value": "",
+              "clearOnHide": true,
+              "validate": {
+                "required": false
+              },
+              "type": "checkbox",
+              "labelPosition": "right",
+              "tags": [],
+              "conditional": {
+                "show": "",
+                "when": null,
+                "eq": ""
+              },
+              "properties": {},
+              "lockKey": true,
+              "hideLabel": false,
+              "customConditional": "show = !data.consultaEspaciosNS"
+            },
+            {
+              "autofocus": false,
+              "input": true,
               "tree": true,
               "components": [
                 {
@@ -3852,7 +3883,8 @@
                   "properties": {},
                   "disabled": true,
                   "calculateValue": "value = data.consultaEspacios.indexOf(row) + 1",
-                  "lockKey": true
+                  "lockKey": true,
+                  "customConditional": "show = !data.consultaEspaciosSinOrdenar"
                 },
                 {
                   "autofocus": false,
@@ -3993,7 +4025,8 @@
               "addAnother": "Agregar espacio",
               "lockKey": true,
               "hideLabel": false,
-              "customConditional": "show = !data.consultaEspaciosNS"
+              "customConditional": "show = !data.consultaEspaciosNS",
+              "isNew": false
             }
           ],
           "type": "panel",
