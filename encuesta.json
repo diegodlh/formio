@@ -406,8 +406,7 @@
                 "value": "",
                 "key": ""
               }
-            ],
-            "disableLimit": false
+            ]
           },
           "dataSrc": "values",
           "valueProperty": "",
@@ -460,9 +459,10 @@
             "required": true,
             "minLength": "",
             "maxLength": "",
-            "pattern": "",
+            "pattern": "\\d+",
             "custom": "",
-            "customPrivate": false
+            "customPrivate": false,
+            "customMessage": "Ingrese un código numérico."
           },
           "conditional": {
             "show": "",
@@ -665,13 +665,37 @@
           "placeholder": "",
           "data": {
             "values": [
-              {
-                "value": "",
-                "label": ""
-              }
-            ],
+      			  {
+      			    "value": "1",
+      			    "label": "Solterx"
+      			  },
+      			  {
+      			    "value": "2",
+      			    "label": "Unidx/en pareja"
+      			  },
+      			  {
+      			    "value": "3",
+      			    "label": "Casadx"
+      			  },
+      			  {
+      			    "value": "4",
+      			    "label": "Separadx/divorciadx"
+      			  },
+      			  {
+      			    "value": "5",
+      			    "label": "Viudx"
+      			  },
+      			  {
+      			    "value": "6",
+      			    "label": "Otro"
+      			  },
+      			  {
+      			    "value": "99",
+      			    "label": "No sabe/No contesta"
+      			  }
+      			],
             "json": "",
-            "url": "http://spreadsheets.google.com/feeds/list/1p6pW92zeU2cE2Eblm-b1Iv9_eleP0Bd0XF-PUufw_GQ/2/public/basic?alt=json",
+            "url": "",
             "resource": "",
             "custom": "",
             "headers": [
@@ -679,16 +703,15 @@
                 "value": "",
                 "key": ""
               }
-            ],
-            "disableLimit": true
+            ]
           },
-          "dataSrc": "url",
-          "valueProperty": "title.$t",
+          "dataSrc": "values",
+          "valueProperty": "",
           "defaultValue": "",
           "refreshOn": "",
           "filter": "",
           "authenticate": false,
-          "template": "<span>{{item.title.$t}} {{ item.content.$t.split(': ')[1] }}</span>",
+          "template": "<span>{{ item.value }} {{ item.label }}</span>",
           "multiple": false,
           "protected": false,
           "unique": false,
@@ -707,7 +730,7 @@
             "eq": ""
           },
           "properties": {},
-          "selectValues": "feed.entry",
+          "selectValues": "",
           "lockKey": true
         },
         {
@@ -1549,12 +1572,48 @@
               "data": {
                 "values": [
                   {
-                    "value": "",
-                    "label": ""
+                    "value": "1",
+                    "label": "Porque estoy cursando actualmente"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Porque tuve que irme de mi casa"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Por situaciones de discriminación / por mi identidad/expresión de género"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Por falta de dinero"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Por tener que trabajar"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Por falta de tiempo"
+                  },
+                  {
+                    "value": "7",
+                    "label": "Porque no me interesa / no tengo ganas"
+                  },
+                  {
+                    "value": "8",
+                    "label": "Por falta de documentación / porque no aceptan mi documentación"
+                  },
+                  {
+                    "value": "9",
+                    "label": "Otros"
+                  },
+                  {
+                    "value": "99",
+                    "label": "No sabe/No contesta"
                   }
                 ],
                 "json": "",
-                "url": "http://spreadsheets.google.com/feeds/list/1p6pW92zeU2cE2Eblm-b1Iv9_eleP0Bd0XF-PUufw_GQ/3/public/basic?alt=json",
+                "url": "",
                 "resource": "",
                 "custom": "",
                 "headers": [
@@ -1564,13 +1623,13 @@
                   }
                 ]
               },
-              "dataSrc": "url",
-              "valueProperty": "title.$t",
+              "dataSrc": "values",
+              "valueProperty": "",
               "defaultValue": "",
               "refreshOn": "",
               "filter": "",
               "authenticate": false,
-              "template": "<span>{{item.title.$t}} {{ item.content.$t.split(': ')[1] }}</span>",
+              "template": "<span>{{ item.value }} {{ item.label }}</span>",
               "multiple": true,
               "protected": false,
               "unique": false,
@@ -1591,7 +1650,7 @@
               },
               "properties": {},
               "customConditional": "",
-              "selectValues": "feed.entry",
+              "selectValues": "",
               "lockKey": true
             },
             {
@@ -1622,9 +1681,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -1799,12 +1859,36 @@
               "data": {
                 "values": [
                   {
-                    "value": "",
-                    "label": ""
+                    "value": "1",
+                    "label": "Casa / Departamento"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Hotel / Pensión"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Casilla"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Local"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Refugio / Situación de calle"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Otra"
+                  },
+                  {
+                    "value": "99",
+                    "label": "No sabe/No contesta"
                   }
                 ],
                 "json": "",
-                "url": "http://spreadsheets.google.com/feeds/list/1p6pW92zeU2cE2Eblm-b1Iv9_eleP0Bd0XF-PUufw_GQ/4/public/basic?alt=json",
+                "url": "",
                 "resource": "",
                 "custom": "",
                 "headers": [
@@ -1812,16 +1896,15 @@
                     "value": "",
                     "key": ""
                   }
-                ],
-                "disableLimit": true
+                ]
               },
-              "dataSrc": "url",
-              "valueProperty": "title.$t",
+              "dataSrc": "values",
+              "valueProperty": "",
               "defaultValue": "",
               "refreshOn": "",
               "filter": "",
               "authenticate": false,
-              "template": "<span>{{item.title.$t}} {{ item.content.$t.split(': ')[1] }}</span>",
+              "template": "<span>{{ item.value }} {{ item.label }}</span>",
               "multiple": false,
               "protected": false,
               "unique": false,
@@ -1840,7 +1923,7 @@
                 "eq": ""
               },
               "properties": {},
-              "selectValues": "feed.entry",
+              "selectValues": "",
               "lockKey": true
             },
             {
@@ -1866,9 +1949,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -1914,12 +1998,36 @@
               "data": {
                 "values": [
                   {
-                    "value": "",
-                    "label": ""
+                    "value": "1",
+                    "label": "Propia"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Alquilada con contrato formal"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Alquilada sin contrato / informal"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Prestada"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Ocupada"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Otra"
+                  },
+                  {
+                    "value": "99",
+                    "label": "No sabe/No contesta"
                   }
                 ],
                 "json": "",
-                "url": "http://spreadsheets.google.com/feeds/list/1p6pW92zeU2cE2Eblm-b1Iv9_eleP0Bd0XF-PUufw_GQ/5/public/basic?alt=json",
+                "url": "",
                 "resource": "",
                 "custom": "",
                 "headers": [
@@ -1929,13 +2037,13 @@
                   }
                 ]
               },
-              "dataSrc": "url",
-              "valueProperty": "title.$t",
+              "dataSrc": "values",
+              "valueProperty": "",
               "defaultValue": "",
               "refreshOn": "",
               "filter": "",
               "authenticate": false,
-              "template": "<span>{{item.title.$t}} {{ item.content.$t.split(': ')[1] }}</span>",
+              "template": "<span>{{ item.value }} {{ item.label }}</span>",
               "multiple": false,
               "protected": false,
               "unique": false,
@@ -1954,7 +2062,7 @@
                 "eq": ""
               },
               "properties": {},
-              "selectValues": "feed.entry",
+              "selectValues": "",
               "lockKey": true
             },
             {
@@ -1980,9 +2088,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -2088,10 +2197,26 @@
                   {
                     "value": "1",
                     "label": "Encuestadx"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Otrxs Familiares"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Pareja"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Amigxs/compañerxs"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Hijx/s"
                   }
                 ],
                 "json": "",
-                "url": "http://spreadsheets.google.com/feeds/list/1p6pW92zeU2cE2Eblm-b1Iv9_eleP0Bd0XF-PUufw_GQ/6/public/basic?alt=json",
+                "url": "",
                 "resource": "",
                 "custom": "",
                 "headers": [
@@ -2099,16 +2224,15 @@
                     "value": "",
                     "key": ""
                   }
-                ],
-                "disableLimit": true
+                ]
               },
-              "dataSrc": "url",
-              "valueProperty": "title.$t",
+              "dataSrc": "values",
+              "valueProperty": "",
               "defaultValue": "",
               "refreshOn": "",
               "filter": "",
               "authenticate": false,
-              "template": "<span>{{item.title.$t}} {{ item.content.$t.split(': ')[1] }}</span>",
+              "template": "<span>{{ item.value }} {{ item.label }}</span>",
               "multiple": false,
               "protected": false,
               "unique": false,
@@ -2130,7 +2254,7 @@
               },
               "properties": {},
               "lockKey": true,
-              "selectValues": "feed.entry"
+              "selectValues": ""
             },
             {
               "autofocus": false,
@@ -2304,9 +2428,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -2701,9 +2826,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+          					"customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -2858,9 +2984,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+          					"customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -3083,9 +3210,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -3350,9 +3478,10 @@
                 "required": true,
                 "minLength": 1,
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -3707,9 +3836,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -4108,9 +4238,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -4414,9 +4545,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+				        "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -4598,9 +4730,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+			         	"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -4981,9 +5114,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+					          "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -5048,8 +5182,7 @@
                   "labelWidth": 30,
                   "labelMargin": 3,
                   "lockKey": true,
-                  "disabled": true,
-                  "isNew": false
+                  "disabled": true
                 },
                 {
                   "autofocus": false,
@@ -5330,8 +5463,7 @@
                 "eq": ""
               },
               "properties": {},
-              "lockKey": true,
-              "isNew": false
+              "lockKey": true
             },
             {
               "autofocus": false,
@@ -5356,9 +5488,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -5447,8 +5580,7 @@
           "validate": {
             "minLength": 1
           },
-          "customConditional": "show = !data.noModificaMotivosNS",
-          "isNew": false
+          "customConditional": "show = !data.noModificaMotivosNS"
         }
       ],
       "type": "panel",
@@ -5462,8 +5594,7 @@
       },
       "properties": {},
       "customConditional": "show = data.sinModificaciones",
-      "lockKey": true,
-      "isNew": false
+      "lockKey": true
     },
     {
       "key": "situacionesSeccion",
@@ -5682,9 +5813,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+          					"customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -5873,9 +6005,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+					          "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -6050,9 +6183,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+					          "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -6227,9 +6361,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+				        "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -6272,9 +6407,10 @@
                     "required": true,
                     "minLength": "",
                     "maxLength": "",
-                    "pattern": "",
+                    "pattern": "\\d+",
                     "custom": "",
-                    "customPrivate": false
+                    "customPrivate": false,
+					          "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -6530,9 +6666,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -6839,9 +6976,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+				        "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7009,9 +7147,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7204,9 +7343,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+        				"customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7517,9 +7657,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+				        "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7669,9 +7810,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+				        "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7818,9 +7960,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+				        "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7966,9 +8109,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+				        "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
