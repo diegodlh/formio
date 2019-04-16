@@ -848,61 +848,6 @@
           "autofocus": false,
           "input": true,
           "tableView": false,
-          "label": "Provincia (Argentina)",
-          "key": "nacimientoProvinciaArg",
-          "placeholder": "",
-          "data": {
-            "values": [
-              {
-                "value": "Buenos Aires",
-                "label": "Buenos Aires"
-              }
-            ],
-            "json": "",
-            "url": "https://apis.datos.gob.ar/georef/api/provincias?",
-            "resource": "",
-            "custom": "",
-            "headers": [
-              {
-                "value": "",
-                "key": ""
-              }
-            ],
-            "disableLimit": true
-          },
-          "dataSrc": "url",
-          "valueProperty": "nombre",
-          "defaultValue": "",
-          "refreshOn": "",
-          "filter": "max=1000",
-          "authenticate": false,
-          "template": "<span>{{ item.nombre }}</span>",
-          "multiple": false,
-          "protected": false,
-          "unique": false,
-          "persistent": true,
-          "hidden": false,
-          "clearOnHide": true,
-          "validate": {
-            "required": true
-          },
-          "type": "select",
-          "labelPosition": "top",
-          "tags": [],
-          "conditional": {
-            "show": "",
-            "when": null,
-            "eq": ""
-          },
-          "properties": {},
-          "lockKey": true,
-          "customConditional": "show = data.nacimientoPais == 'Argentina' && !data.nacimientoProvinciaNS",
-          "selectValues": "provincias"
-        },
-        {
-          "autofocus": false,
-          "input": true,
-          "tableView": false,
           "inputType": "text",
           "inputMask": "",
           "label": "Provincia/Estado",
@@ -922,9 +867,10 @@
             "required": true,
             "minLength": "",
             "maxLength": "",
-            "pattern": "",
+            "pattern": "\\d+",
             "custom": "",
-            "customPrivate": false
+            "customPrivate": false,
+            "customMessage": "Ingrese un código numérico."
           },
           "conditional": {
             "show": "",
@@ -936,8 +882,8 @@
           "inputFormat": "plain",
           "tags": [],
           "properties": {},
-          "lockKey": true,
-          "customConditional": "show = data.nacimientoPais != 'Argentina' && !data.nacimientoProvinciaNS"
+          "customConditional": "show = !data.nacimientoProvinciaNS",
+          "lockKey": true
         },
         {
           "autofocus": false,
@@ -981,64 +927,6 @@
               "autofocus": false,
               "input": true,
               "tableView": false,
-              "label": "Partido/Departamento (Argentina)",
-              "key": "nacimientoPartidoArg",
-              "placeholder": "",
-              "data": {
-                "values": [
-                  {
-                    "value": "",
-                    "label": ""
-                  }
-                ],
-                "json": "",
-                "url": "https://apis.datos.gob.ar/georef/api/municipios?",
-                "resource": "",
-                "custom": "",
-                "headers": [
-                  {
-                    "value": "",
-                    "key": ""
-                  }
-                ],
-                "disableLimit": true
-              },
-              "dataSrc": "url",
-              "valueProperty": "nombre",
-              "defaultValue": "",
-              "refreshOn": "nacimientoProvinciaArg",
-              "filter": "max=1000&provincia={{ data.nacimientoProvinciaArg ? data.nacimientoProvinciaArg : 0 }}",
-              "authenticate": false,
-              "template": "<span>{{ item.nombre }}</span>",
-              "multiple": false,
-              "protected": false,
-              "unique": false,
-              "persistent": true,
-              "hidden": false,
-              "clearOnHide": true,
-              "validate": {
-                "required": true
-              },
-              "type": "select",
-              "labelPosition": "top",
-              "tags": [],
-              "conditional": {
-                "show": "",
-                "when": null,
-                "eq": ""
-              },
-              "properties": {},
-              "selectValues": "municipios",
-              "limit": "",
-              "searchField": "",
-              "clearOnRefresh": true,
-              "lockKey": true,
-              "customConditional": "show = data.nacimientoPais == 'Argentina' && !data.nacimientoPartidoNS"
-            },
-            {
-              "autofocus": false,
-              "input": true,
-              "tableView": false,
               "inputType": "text",
               "inputMask": "",
               "label": "Partido/Departamento",
@@ -1058,9 +946,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -1072,8 +961,8 @@
               "inputFormat": "plain",
               "tags": [],
               "properties": {},
-              "lockKey": true,
-              "customConditional": "show = data.nacimientoPais != 'Argentina' && !data.nacimientoPartidoNS"
+              "customConditional": "show = !data.nacimientoPartidoNS",
+              "lockKey": true
             },
             {
               "autofocus": false,
@@ -1109,63 +998,6 @@
               "autofocus": false,
               "input": true,
               "tableView": false,
-              "label": "Ciudad/Localidad (Argentina)",
-              "key": "nacimientoCiudadArg",
-              "placeholder": "",
-              "data": {
-                "values": [
-                  {
-                    "value": "",
-                    "label": ""
-                  }
-                ],
-                "json": "",
-                "url": "https://apis.datos.gob.ar/georef/api/localidades?",
-                "resource": "",
-                "custom": "",
-                "headers": [
-                  {
-                    "value": "",
-                    "key": ""
-                  }
-                ],
-                "disableLimit": true
-              },
-              "dataSrc": "url",
-              "valueProperty": "nombre",
-              "defaultValue": "",
-              "refreshOn": "nacimientoPartidoArg",
-              "filter": "max=1000&municipio={{ data.nacimientoPartidoArg ? data.nacimientoPartidoArg : 0 }}",
-              "authenticate": false,
-              "template": "<span>{{ item.nombre }}</span>",
-              "multiple": false,
-              "protected": false,
-              "unique": false,
-              "persistent": true,
-              "hidden": false,
-              "clearOnHide": true,
-              "validate": {
-                "required": true
-              },
-              "type": "select",
-              "labelPosition": "top",
-              "tags": [],
-              "conditional": {
-                "show": "",
-                "when": null,
-                "eq": ""
-              },
-              "properties": {},
-              "selectValues": "localidades",
-              "limit": "",
-              "clearOnRefresh": true,
-              "lockKey": true,
-              "customConditional": "show = data.nacimientoPais == 'Argentina' && !data.nacimientoCiudadNS"
-            },
-            {
-              "autofocus": false,
-              "input": true,
-              "tableView": false,
               "inputType": "text",
               "inputMask": "",
               "label": "Ciudad/Localidad",
@@ -1185,9 +1017,10 @@
                 "required": true,
                 "minLength": "",
                 "maxLength": "",
-                "pattern": "",
+                "pattern": "\\d+",
                 "custom": "",
-                "customPrivate": false
+                "customPrivate": false,
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -1199,8 +1032,8 @@
               "inputFormat": "plain",
               "tags": [],
               "properties": {},
-              "lockKey": true,
-              "customConditional": "show = data.nacimientoPais != 'Argentina' && !data.nacimientoCiudadNS"
+              "customConditional": "show = !data.nacimientoCiudadNS",
+              "lockKey": true
             },
             {
               "autofocus": false,
@@ -1245,94 +1078,6 @@
           "properties": {},
           "lockKey": true,
           "customConditional": "show = data.nacimientoProvinciaArg != 'Ciudad Autónoma de Buenos Aires'"
-        },
-        {
-          "autofocus": false,
-          "input": true,
-          "tableView": false,
-          "label": "Barrio (CABA)",
-          "key": "nacimientoBarrioCABA",
-          "placeholder": "",
-          "data": {
-            "values": [
-              {
-                "value": "",
-                "label": ""
-              }
-            ],
-            "json": "",
-            "url": "https://apis.datos.gob.ar/georef/api/localidades?",
-            "resource": "",
-            "custom": "",
-            "headers": [
-              {
-                "value": "",
-                "key": ""
-              }
-            ],
-            "disableLimit": true
-          },
-          "dataSrc": "url",
-          "valueProperty": "nombre",
-          "defaultValue": "",
-          "refreshOn": "nacimientoProvinciaArg",
-          "filter": "max=1000&provincia=Ciudad Autónoma de Buenos Aires",
-          "authenticate": false,
-          "template": "<span>{{ item.nombre }}</span>",
-          "multiple": false,
-          "protected": false,
-          "unique": false,
-          "persistent": true,
-          "hidden": false,
-          "clearOnHide": true,
-          "validate": {
-            "required": true
-          },
-          "type": "select",
-          "labelPosition": "top",
-          "tags": [],
-          "conditional": {
-            "show": "",
-            "when": null,
-            "eq": ""
-          },
-          "properties": {},
-          "selectValues": "localidades",
-          "limit": "",
-          "clearOnRefresh": true,
-          "lockKey": true,
-          "customConditional": "show = data.nacimientoProvinciaArg == 'Ciudad Autónoma de Buenos Aires' && !data.nacimientoBarrioNS"
-        },
-        {
-          "autofocus": false,
-          "input": true,
-          "inputType": "checkbox",
-          "tableView": false,
-          "label": "Barrio: No sabe/No contesta",
-          "dataGridLabel": false,
-          "key": "nacimientoBarrioNS",
-          "defaultValue": false,
-          "protected": false,
-          "persistent": true,
-          "hidden": false,
-          "name": "",
-          "value": "",
-          "clearOnHide": true,
-          "validate": {
-            "required": false
-          },
-          "type": "checkbox",
-          "labelPosition": "right",
-          "tags": [],
-          "conditional": {
-            "show": "",
-            "when": null,
-            "eq": ""
-          },
-          "properties": {},
-          "lockKey": true,
-          "hideLabel": false,
-          "customConditional": "show = data.nacimientoProvinciaArg == 'Ciudad Autónoma de Buenos Aires'"
         }
       ],
       "type": "panel",
