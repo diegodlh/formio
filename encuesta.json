@@ -160,45 +160,27 @@
           "autofocus": false,
           "input": true,
           "tableView": false,
+          "inputType": "number",
           "label": "Partido",
           "key": "residenciaPartido",
           "placeholder": "",
-          "data": {
-            "values": [
-              {
-                "value": "",
-                "label": ""
-              }
-            ],
-            "json": "",
-            "url": "https://apis.datos.gob.ar/georef/api/municipios?",
-            "resource": "",
-            "custom": "",
-            "headers": [
-              {
-                "value": "",
-                "key": ""
-              }
-            ],
-            "disableLimit": true
-          },
-          "dataSrc": "url",
-          "valueProperty": "nombre",
+          "prefix": "",
+          "suffix": "",
           "defaultValue": "",
-          "refreshOn": "residenciaProvincia",
-          "filter": "max=1000&provincia={{ data.residenciaProvincia ? data.residenciaProvincia : 0 }}",
-          "authenticate": false,
-          "template": "<span>{{ item.nombre }}</span>",
-          "multiple": false,
           "protected": false,
-          "unique": false,
           "persistent": true,
           "hidden": false,
           "clearOnHide": true,
           "validate": {
-            "required": true
+            "required": true,
+            "min": "",
+            "max": "",
+            "step": "any",
+            "integer": "",
+            "multiple": "",
+            "custom": ""
           },
-          "type": "select",
+          "type": "number",
           "labelPosition": "top",
           "tags": [],
           "conditional": {
@@ -207,12 +189,8 @@
             "eq": ""
           },
           "properties": {},
-          "selectValues": "municipios",
-          "limit": "",
-          "searchField": "",
-          "clearOnRefresh": true,
-          "lockKey": true,
-          "customConditional": "show=!data.residenciaPartidoNS"
+          "customConditional": "show=!data.residenciaPartidoNS",
+          "lockKey": true
         },
         {
           "autofocus": false,
@@ -248,45 +226,27 @@
           "autofocus": false,
           "input": true,
           "tableView": false,
+          "inputType": "number",
           "label": "Ciudad/Localidad",
           "key": "residenciaCiudad",
           "placeholder": "",
-          "data": {
-            "values": [
-              {
-                "value": "",
-                "label": ""
-              }
-            ],
-            "json": "",
-            "url": "https://apis.datos.gob.ar/georef/api/localidades?",
-            "resource": "",
-            "custom": "",
-            "headers": [
-              {
-                "value": "",
-                "key": ""
-              }
-            ],
-            "disableLimit": true
-          },
-          "dataSrc": "url",
-          "valueProperty": "nombre",
+          "prefix": "",
+          "suffix": "",
           "defaultValue": "",
-          "refreshOn": "residenciaPartido",
-          "filter": "max=1000&municipio={{ data.residenciaPartido ? data.residenciaPartido : 0 }}",
-          "authenticate": false,
-          "template": "<span>{{ item.nombre }}</span>",
-          "multiple": false,
           "protected": false,
-          "unique": false,
           "persistent": true,
           "hidden": false,
           "clearOnHide": true,
           "validate": {
-            "required": true
+            "required": true,
+            "min": "",
+            "max": "",
+            "step": "any",
+            "integer": "",
+            "multiple": "",
+            "custom": ""
           },
-          "type": "select",
+          "type": "number",
           "labelPosition": "top",
           "tags": [],
           "conditional": {
@@ -295,11 +255,8 @@
             "eq": ""
           },
           "properties": {},
-          "selectValues": "localidades",
-          "limit": "",
-          "clearOnRefresh": true,
-          "lockKey": true,
-          "customConditional": "show=!data.residenciaCiudadNS"
+          "customConditional": "show=!data.residenciaCiudadNS",
+          "lockKey": true
         },
         {
           "autofocus": false,
@@ -665,35 +622,35 @@
           "placeholder": "",
           "data": {
             "values": [
-      			  {
-      			    "value": "1",
-      			    "label": "Solterx"
-      			  },
-      			  {
-      			    "value": "2",
-      			    "label": "Unidx/en pareja"
-      			  },
-      			  {
-      			    "value": "3",
-      			    "label": "Casadx"
-      			  },
-      			  {
-      			    "value": "4",
-      			    "label": "Separadx/divorciadx"
-      			  },
-      			  {
-      			    "value": "5",
-      			    "label": "Viudx"
-      			  },
-      			  {
-      			    "value": "6",
-      			    "label": "Otro"
-      			  },
-      			  {
-      			    "value": "99",
-      			    "label": "No sabe/No contesta"
-      			  }
-      			],
+              {
+                "value": "1",
+                "label": "Solterx"
+              },
+              {
+                "value": "2",
+                "label": "Unidx/en pareja"
+              },
+              {
+                "value": "3",
+                "label": "Casadx"
+              },
+              {
+                "value": "4",
+                "label": "Separadx/divorciadx"
+              },
+              {
+                "value": "5",
+                "label": "Viudx"
+              },
+              {
+                "value": "6",
+                "label": "Otro"
+              },
+              {
+                "value": "99",
+                "label": "No sabe/No contesta"
+              }
+            ],
             "json": "",
             "url": "",
             "resource": "",
@@ -1365,8 +1322,7 @@
           "properties": {},
           "lockKey": true,
           "hideLabel": false,
-          "customConditional": "show = data.nacimientoProvinciaArg == 'Ciudad Autónoma de Buenos Aires'",
-          "isNew": false
+          "customConditional": "show = data.nacimientoProvinciaArg == 'Ciudad Autónoma de Buenos Aires'"
         }
       ],
       "type": "panel",
@@ -1952,7 +1908,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -2091,7 +2047,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -2431,7 +2387,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -2829,7 +2785,7 @@
                     "pattern": "\\d+",
                     "custom": "",
                     "customPrivate": false,
-          					"customMessage": "Ingrese un código numérico."
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -2987,7 +2943,7 @@
                     "pattern": "\\d+",
                     "custom": "",
                     "customPrivate": false,
-          					"customMessage": "Ingrese un código numérico."
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -3213,7 +3169,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -3481,7 +3437,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -3839,7 +3795,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -4548,7 +4504,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-				        "customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -4733,7 +4689,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-			         	"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -5117,7 +5073,7 @@
                     "pattern": "\\d+",
                     "custom": "",
                     "customPrivate": false,
-					          "customMessage": "Ingrese un código numérico."
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -5491,7 +5447,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -5816,7 +5772,7 @@
                     "pattern": "\\d+",
                     "custom": "",
                     "customPrivate": false,
-          					"customMessage": "Ingrese un código numérico."
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -6008,7 +5964,7 @@
                     "pattern": "\\d+",
                     "custom": "",
                     "customPrivate": false,
-					          "customMessage": "Ingrese un código numérico."
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -6186,7 +6142,7 @@
                     "pattern": "\\d+",
                     "custom": "",
                     "customPrivate": false,
-					          "customMessage": "Ingrese un código numérico."
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -6364,7 +6320,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-				        "customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -6410,7 +6366,7 @@
                     "pattern": "\\d+",
                     "custom": "",
                     "customPrivate": false,
-					          "customMessage": "Ingrese un código numérico."
+                    "customMessage": "Ingrese un código numérico."
                   },
                   "conditional": {
                     "show": "",
@@ -6669,7 +6625,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -6979,7 +6935,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-				        "customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7150,7 +7106,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7346,7 +7302,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-        				"customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7660,7 +7616,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-				        "customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7813,7 +7769,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-				        "customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -7963,7 +7919,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-				        "customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
@@ -8112,7 +8068,7 @@
                 "pattern": "\\d+",
                 "custom": "",
                 "customPrivate": false,
-				        "customMessage": "Ingrese un código numérico."
+                "customMessage": "Ingrese un código numérico."
               },
               "conditional": {
                 "show": "",
