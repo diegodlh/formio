@@ -4025,8 +4025,7 @@
               "addAnother": "Agregar espacio",
               "lockKey": true,
               "hideLabel": false,
-              "customConditional": "show = !data.consultaEspaciosNS",
-              "isNew": false
+              "customConditional": "show = !data.consultaEspaciosNS"
             }
           ],
           "type": "panel",
@@ -4104,56 +4103,42 @@
           "autofocus": false,
           "input": true,
           "tableView": false,
+          "inputType": "text",
+          "inputMask": "",
           "label": "Otra provincia",
           "key": "consultaEspacioPrincipalUbicacionOtra",
           "placeholder": "",
-          "data": {
-            "values": [
-              {
-                "value": "",
-                "label": ""
-              }
-            ],
-            "json": "",
-            "url": "https://apis.datos.gob.ar/georef/api/provincias?",
-            "resource": "",
-            "custom": "",
-            "headers": [
-              {
-                "value": "",
-                "key": ""
-              }
-            ],
-            "disableLimit": true
-          },
-          "dataSrc": "url",
-          "valueProperty": "nombre",
-          "defaultValue": "",
-          "refreshOn": "",
-          "filter": "max=1000",
-          "authenticate": false,
-          "template": "<span>{{ item.nombre }}</span>",
+          "prefix": "",
+          "suffix": "",
           "multiple": false,
+          "defaultValue": "",
           "protected": false,
           "unique": false,
           "persistent": true,
           "hidden": false,
           "clearOnHide": true,
+          "spellcheck": true,
           "validate": {
-            "required": true
+            "required": true,
+            "minLength": "",
+            "maxLength": "",
+            "pattern": "\\d+",
+            "custom": "",
+            "customPrivate": false,
+            "customMessage": "Ingrese un código numérico."
           },
-          "type": "select",
-          "labelPosition": "top",
-          "tags": [],
           "conditional": {
             "show": "",
             "when": null,
             "eq": ""
           },
+          "type": "textfield",
+          "labelPosition": "top",
+          "inputFormat": "plain",
+          "tags": [],
           "properties": {},
-          "lockKey": true,
-          "selectValues": "provincias",
-          "customConditional": "show = data.consultaEspacioPrincipalUbicacion == '3'"
+          "customConditional": "show = data.consultaEspacioPrincipalUbicacion == '3'",
+          "lockKey": true
         }
       ],
       "type": "panel",
