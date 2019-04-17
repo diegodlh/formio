@@ -461,6 +461,11 @@
               "value": "m",
               "label": "M",
               "shortcut": ""
+            },
+            {
+              "value": "ns",
+              "label": "NS/NC",
+              "shortcut": ""
             }
           ],
           "defaultValue": "",
@@ -2283,7 +2288,8 @@
         "eq": ""
       },
       "properties": {},
-      "lockKey": true
+      "lockKey": true,
+      "customConditional": "show = data.viviendaCual != '5'"
     },
     {
       "autofocus": false,
@@ -4755,7 +4761,7 @@
                   "inputType": "number",
                   "label": "5.7 Año",
                   "key": "intervencionAno",
-                  "placeholder": "",
+                  "placeholder": "4 dígitos o 99",
                   "prefix": "",
                   "suffix": "",
                   "defaultValue": "",
@@ -4770,8 +4776,8 @@
                     "step": "any",
                     "integer": "",
                     "multiple": "",
-                    "custom": "",
-                    "customMessage": "Ingrese 0 si no corresponde"
+                    "custom": "valid = input === 99 || (input >= 1920 && input <= 2020) ? true : 'Ingrese un año entre 1920 y 2020'",
+                    "customMessage": ""
                   },
                   "type": "number",
                   "inDataGrid": true,
@@ -4975,7 +4981,7 @@
                   "inputType": "number",
                   "label": "5.7 Año",
                   "key": "intervencionOtraAno",
-                  "placeholder": "",
+                  "placeholder": "4 dígitos o 99",
                   "prefix": "",
                   "suffix": "",
                   "defaultValue": "",
@@ -4990,8 +4996,8 @@
                     "step": "any",
                     "integer": "",
                     "multiple": "",
-                    "custom": "",
-                    "customMessage": "Ingrese 0 si no corresponde"
+                    "custom": "valid = input === 99 || (input >= 1920 && input <= 2020) ? true : 'Ingrese un año entre 1920 y 2020'",
+                    "customMessage": ""
                   },
                   "type": "number",
                   "inDataGrid": true,
@@ -5475,7 +5481,7 @@
                 },
                 {
                   "value": "7",
-                  "label": "(7) Otras"
+                  "label": "(6) Otras"
                 }
               ],
               "values": [
@@ -6223,6 +6229,10 @@
               {
                 "value": "5",
                 "label": "No me atendieron"
+              },
+              {
+                "value": "6",
+                "label": "No corresponde"
               },
               {
                 "value": "99",
