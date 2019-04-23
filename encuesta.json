@@ -4580,63 +4580,27 @@
                   "autofocus": false,
                   "input": true,
                   "tableView": false,
+                  "inputType": "number",
                   "label": "Intervención",
                   "key": "intervencion",
                   "placeholder": "",
-                  "data": {
-                    "values": [
-                      {
-                        "value": "1",
-                        "label": "Inyección de siliconas"
-                      },
-                      {
-                        "value": "2",
-                        "label": "Implante de prótesis"
-                      },
-                      {
-                        "value": "3",
-                        "label": "Tratamiento hormonal"
-                      },
-                      {
-                        "value": "4",
-                        "label": "Intervención quirúrgica genital"
-                      },
-                      {
-                        "value": "5",
-                        "label": "Mastectomía"
-                      },
-                      {
-                        "value": "6",
-                        "label": "Intervención quirúrgica facial"
-                      },
-                      {
-                        "value": "7",
-                        "label": "Otras"
-                      }
-                    ],
-                    "json": "",
-                    "url": "",
-                    "resource": "",
-                    "custom": ""
-                  },
-                  "dataSrc": "values",
-                  "valueProperty": "",
+                  "prefix": "",
+                  "suffix": "",
                   "defaultValue": "",
-                  "refreshOn": "",
-                  "filter": "",
-                  "authenticate": false,
-                  "template": "<span>{{item.value}} {{ item.label }}</span>",
-                  "multiple": false,
                   "protected": false,
-                  "unique": false,
                   "persistent": true,
                   "hidden": false,
                   "clearOnHide": true,
                   "validate": {
                     "required": true,
-                    "custom": "valid = data.intervenciones.filter(a => a.intervencion == input).length > 1 ? 'Esta intervención ya fue ingresada' : true"
+                    "min": "",
+                    "max": "",
+                    "step": "any",
+                    "integer": "",
+                    "multiple": "",
+                    "custom": ""
                   },
-                  "type": "select",
+                  "type": "number",
                   "inDataGrid": true,
                   "labelPosition": "top",
                   "tags": [],
@@ -4646,6 +4610,8 @@
                     "eq": ""
                   },
                   "properties": {},
+                  "disabled": true,
+                  "calculateValue": "value = data.intervenciones.indexOf(row) + 1",
                   "lockKey": true
                 },
                 {
@@ -4723,7 +4689,7 @@
                       "shortcut": ""
                     },
                     {
-                      "value": "99Nsnc",
+                      "value": "99",
                       "label": "99 NSNC",
                       "shortcut": ""
                     }
@@ -4943,7 +4909,7 @@
                       "shortcut": ""
                     },
                     {
-                      "value": "99Nsnc",
+                      "value": "99",
                       "label": "99 NSNC",
                       "shortcut": ""
                     }
