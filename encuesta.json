@@ -2014,7 +2014,7 @@
               "clearOnHide": true,
               "validate": {
                 "required": true,
-                "custom": "var principales = data.integrantes.filter(a=>a.aportante=='principal').length + data.otrxsIntegrantes.filter(a=>a.otrxAportante=='principal').length\nvalid = input != 'principal' || principales == 1 ? true : 'Sólo puede haber unx aportante principal'"
+                "custom": "var principales = 0\nif (typeof data.integrantes !== 'undefined') {\n    principales += data.integrantes.filter(a=>a.aportante=='principal').length\n}\nif (typeof data.otrxsIntegrantes !== 'undefined') {\n    principales += data.otrxsIntegrantes.filter(a=>a.otrxAportante=='principal').length\n}\nvalid = input != 'principal' || principales == 1 ? true : 'Sólo puede haber unx aportante principal'"
               },
               "type": "select",
               "inDataGrid": true,
@@ -2204,7 +2204,7 @@
               "clearOnHide": true,
               "validate": {
                 "required": true,
-                "custom": "var principales = data.integrantes.filter(a=>a.aportante=='principal').length + data.otrxsIntegrantes.filter(a=>a.otrxAportante=='principal').length\nvalid = input != 'principal' || principales == 1 ? true : 'Sólo puede haber unx aportante principal'"
+                "custom": "var principales = 0\nif (typeof data.integrantes !== 'undefined') {\n    principales += data.integrantes.filter(a=>a.aportante=='principal').length\n}\nif (typeof data.otrxsIntegrantes !== 'undefined') {\n    principales += data.otrxsIntegrantes.filter(a=>a.otrxAportante=='principal').length\n}\nvalid = input != 'principal' || principales == 1 ? true : 'Sólo puede haber unx aportante principal'"
               },
               "type": "select",
               "inDataGrid": true,
@@ -2289,7 +2289,7 @@
       },
       "properties": {},
       "lockKey": true,
-      "customConditional": "show = data.viviendaCual != '5'"
+      "customConditional": ""
     },
     {
       "autofocus": false,
@@ -3024,7 +3024,7 @@
             "step": "any",
             "integer": "",
             "multiple": "",
-            "custom": "if (isNaN(input)) {\n    valid = true\n} else if (input <= data.edad) {\n    valid = true\n} else {\n    valid = 'No puede ser mayor que la edad de lx entrevistadx'\n}"
+            "custom": "if (isNaN(input)) {\n    valid = true\n} else if (input <= data.edad) {\n    valid = true\n} else if (input == 99) {\n    valid = true\n} else {\n    valid = 'No puede ser mayor que la edad de lx entrevistadx'\n}"
           },
           "type": "number",
           "labelPosition": "top",
