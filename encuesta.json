@@ -1208,7 +1208,8 @@
             "eq": ""
           },
           "properties": {},
-          "lockKey": true
+          "lockKey": true,
+          "isNew": false
         },
         {
           "autofocus": false,
@@ -1522,7 +1523,7 @@
         "eq": ""
       },
       "properties": {},
-      "customConditional": "show = !(['5','7','9','99'].includes(data.maxEduca))",
+      "customConditional": "show = !(['5','6','7','8','9','99'].includes(data.maxEduca))",
       "lockKey": true
     },
     {
@@ -3890,7 +3891,8 @@
                   "disabled": true,
                   "calculateValue": "value = data.consultaEspacios.indexOf(row) + 1",
                   "lockKey": true,
-                  "customConditional": "show = !data.consultaEspaciosSinOrdenar"
+                  "customConditional": "show = !data.consultaEspaciosSinOrdenar",
+                  "isNew": false
                 },
                 {
                   "autofocus": false,
@@ -3950,7 +3952,7 @@
                   "clearOnHide": true,
                   "validate": {
                     "required": true,
-                    "custom": "valid = input == '7' || data.consultaEspacios.filter(a => a.consultaEspacio == input).length == 1 ? true : 'Este espacio ya fue incluido' "
+                    "custom": "valid = input == '7' || input == '3' || data.consultaEspacios.filter(a => a.consultaEspacio == input).length == 1 ? true : 'Este espacio ya fue incluido' "
                   },
                   "type": "select",
                   "inDataGrid": true,
@@ -4031,7 +4033,8 @@
               "addAnother": "Agregar espacio",
               "lockKey": true,
               "hideLabel": false,
-              "customConditional": "show = !data.consultaEspaciosNS"
+              "customConditional": "show = !data.consultaEspaciosNS",
+              "isNew": false
             }
           ],
           "type": "panel",
@@ -4084,14 +4087,15 @@
           "filter": "",
           "authenticate": false,
           "template": "<span>{{ item.value }} {{ item.label }}</span>",
-          "multiple": false,
+          "multiple": true,
           "protected": false,
           "unique": false,
           "persistent": true,
           "hidden": false,
           "clearOnHide": true,
           "validate": {
-            "required": true
+            "required": true,
+            "custom": "valid = input.includes('99') && input.length>1 ? 'Si elige 99: No sabe/No contesta, no puede elegir otra opción' : true"
           },
           "type": "select",
           "labelPosition": "top",
@@ -4143,7 +4147,7 @@
           "inputFormat": "plain",
           "tags": [],
           "properties": {},
-          "customConditional": "show = data.consultaEspacioPrincipalUbicacion == '3'",
+          "customConditional": "show = false\nif (typeof data.consultaEspacioPrincipalUbicacion !== 'undefined') {\n    show = data.consultaEspacioPrincipalUbicacion.includes('3')    \n}",
           "lockKey": true
         }
       ],
@@ -7922,7 +7926,7 @@
               "rightIcon": "",
               "block": false,
               "action": "submit",
-              "disableOnInvalid": false,
+              "disableOnInvalid": true,
               "theme": "primary",
               "type": "button",
               "tags": [],
@@ -7931,7 +7935,8 @@
                 "when": null,
                 "eq": ""
               },
-              "properties": {}
+              "properties": {},
+              "isNew": false
             }
           ],
           "width": 6,
