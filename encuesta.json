@@ -1208,8 +1208,7 @@
             "eq": ""
           },
           "properties": {},
-          "lockKey": true,
-          "isNew": false
+          "lockKey": true
         },
         {
           "autofocus": false,
@@ -3891,8 +3890,7 @@
                   "disabled": true,
                   "calculateValue": "value = data.consultaEspacios.indexOf(row) + 1",
                   "lockKey": true,
-                  "customConditional": "show = !data.consultaEspaciosSinOrdenar",
-                  "isNew": false
+                  "customConditional": "show = !data.consultaEspaciosSinOrdenar"
                 },
                 {
                   "autofocus": false,
@@ -4033,8 +4031,7 @@
               "addAnother": "Agregar espacio",
               "lockKey": true,
               "hideLabel": false,
-              "customConditional": "show = !data.consultaEspaciosNS",
-              "isNew": false
+              "customConditional": "show = !data.consultaEspaciosNS"
             }
           ],
           "type": "panel",
@@ -6050,7 +6047,7 @@
               "placeholder": "",
               "prefix": "",
               "suffix": "",
-              "multiple": false,
+              "multiple": true,
               "defaultValue": "",
               "protected": false,
               "unique": false,
@@ -7935,8 +7932,7 @@
                 "when": null,
                 "eq": ""
               },
-              "properties": {},
-              "isNew": false
+              "properties": {}
             }
           ],
           "width": 6,
