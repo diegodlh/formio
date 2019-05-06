@@ -1,0 +1,4 @@
+6.5.1 si se cambia de respuesta única a respuesta múltiple, convertir las del primer tipo en el segundo tipo
+
+considerar descargar todas las respuestas e intentar cargarlas nuevamente en batch para encontrar nuevos errores de validación
+
