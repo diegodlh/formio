@@ -998,77 +998,6 @@
               "properties": {},
               "lockKey": true,
               "hideLabel": false
-            },
-            {
-              "autofocus": false,
-              "input": true,
-              "tableView": false,
-              "inputType": "text",
-              "inputMask": "",
-              "label": "Ciudad/Localidad",
-              "key": "nacimientoCiudad",
-              "placeholder": "",
-              "prefix": "",
-              "suffix": "",
-              "multiple": false,
-              "defaultValue": "",
-              "protected": false,
-              "unique": false,
-              "persistent": true,
-              "hidden": false,
-              "clearOnHide": true,
-              "spellcheck": true,
-              "validate": {
-                "required": true,
-                "minLength": "",
-                "maxLength": "",
-                "pattern": "\\d+",
-                "custom": "",
-                "customPrivate": false,
-                "customMessage": "Ingrese un código numérico."
-              },
-              "conditional": {
-                "show": "",
-                "when": null,
-                "eq": ""
-              },
-              "type": "textfield",
-              "labelPosition": "top",
-              "inputFormat": "plain",
-              "tags": [],
-              "properties": {},
-              "customConditional": "show = !data.nacimientoCiudadNS",
-              "lockKey": true
-            },
-            {
-              "autofocus": false,
-              "input": true,
-              "inputType": "checkbox",
-              "tableView": false,
-              "label": "Ciudad: No sabe/No contesta",
-              "dataGridLabel": false,
-              "key": "nacimientoCiudadNS",
-              "defaultValue": false,
-              "protected": false,
-              "persistent": true,
-              "hidden": false,
-              "name": "",
-              "value": "",
-              "clearOnHide": true,
-              "validate": {
-                "required": false
-              },
-              "type": "checkbox",
-              "labelPosition": "right",
-              "tags": [],
-              "conditional": {
-                "show": "",
-                "when": null,
-                "eq": ""
-              },
-              "properties": {},
-              "lockKey": true,
-              "hideLabel": false
             }
           ],
           "type": "panel",
@@ -1082,7 +1011,78 @@
           },
           "properties": {},
           "lockKey": true,
-          "customConditional": "show = data.nacimientoProvinciaArg != 'Ciudad Autónoma de Buenos Aires'"
+          "customConditional": "show = data.nacimientoProvincia != '1'"
+        },
+        {
+          "autofocus": false,
+          "input": true,
+          "tableView": false,
+          "inputType": "text",
+          "inputMask": "",
+          "label": "Ciudad/Localidad",
+          "key": "nacimientoCiudad",
+          "placeholder": "",
+          "prefix": "",
+          "suffix": "",
+          "multiple": false,
+          "defaultValue": "",
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "hidden": false,
+          "clearOnHide": true,
+          "spellcheck": true,
+          "validate": {
+            "required": true,
+            "minLength": "",
+            "maxLength": "",
+            "pattern": "\\d+",
+            "custom": "",
+            "customPrivate": false,
+            "customMessage": "Ingrese un código numérico."
+          },
+          "conditional": {
+            "show": "",
+            "when": null,
+            "eq": ""
+          },
+          "type": "textfield",
+          "labelPosition": "top",
+          "inputFormat": "plain",
+          "tags": [],
+          "properties": {},
+          "customConditional": "show = !data.nacimientoCiudadNS",
+          "lockKey": true
+        },
+        {
+          "autofocus": false,
+          "input": true,
+          "inputType": "checkbox",
+          "tableView": false,
+          "label": "Ciudad: No sabe/No contesta",
+          "dataGridLabel": false,
+          "key": "nacimientoCiudadNS",
+          "defaultValue": false,
+          "protected": false,
+          "persistent": true,
+          "hidden": false,
+          "name": "",
+          "value": "",
+          "clearOnHide": true,
+          "validate": {
+            "required": false
+          },
+          "type": "checkbox",
+          "labelPosition": "right",
+          "tags": [],
+          "conditional": {
+            "show": "",
+            "when": null,
+            "eq": ""
+          },
+          "properties": {},
+          "lockKey": true,
+          "hideLabel": false
         }
       ],
       "type": "panel",
