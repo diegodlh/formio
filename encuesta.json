@@ -6,37 +6,41 @@
       "autofocus": true,
       "input": true,
       "tableView": true,
-      "inputType": "number",
+      "inputType": "text",
+      "inputMask": "",
       "label": "Número de encuesta",
       "key": "numencuesta",
       "placeholder": "",
       "prefix": "",
       "suffix": "",
+      "multiple": false,
       "defaultValue": "",
       "protected": false,
+      "unique": true,
       "persistent": true,
       "hidden": false,
       "clearOnHide": true,
+      "spellcheck": true,
       "validate": {
         "required": true,
-        "min": "",
-        "max": "",
-        "step": "any",
-        "integer": "",
-        "multiple": "",
-        "custom": ""
+        "minLength": "",
+        "maxLength": "",
+        "pattern": "\\d+",
+        "custom": "",
+        "customPrivate": false,
+        "customMessage": "Ingrese un código numérico."
       },
-      "type": "number",
-      "unique": true,
-      "labelPosition": "top",
-      "tags": [],
       "conditional": {
         "show": "",
         "when": null,
         "eq": ""
       },
+      "type": "textfield",
+      "labelPosition": "top",
+      "inputFormat": "plain",
+      "tags": [],
       "properties": {},
-      "decimalLimit": 0
+      "lockKey": true
     },
     {
       "autofocus": false,
@@ -2289,7 +2293,7 @@
       },
       "properties": {},
       "lockKey": true,
-      "customConditional": ""
+      "customConditional": "show = data.viviendaCual != '5'"
     },
     {
       "autofocus": false,
@@ -2343,7 +2347,7 @@
         "eq": ""
       },
       "properties": {},
-      "customConditional": "show = data.integrantes.map(a=>a.integrante).includes('2')",
+      "customConditional": "show = data.viviendaCual == '5' ? true : false\nif (typeof data.integrantes !== 'undefined') {\n    show = data.integrantes.map(a=>a.integrante).includes('2') ? true : false\n}",
       "lockKey": true
     },
     {
