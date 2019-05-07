@@ -1,7 +1,3 @@
-- 6.5.1 si se cambia de respuesta única a respuesta múltiple, convertir las del primer tipo en el segundo tipo
-- considerar descargar todas las respuestas e intentar cargarlas nuevamente en batch para encontrar nuevos errores de validación
+- definir criterio pregunta 3.1 y volver a bajar y subir todas las encuestas para filtrar como corresponda
 - derivadas de preguntas 3.1 y 2.1 va a haber que limpiarlas para anular respuestas que no corresponden según nuevos criterios (refugio/calle y terciario/universitario incompleto, respectivamente).
-- pregunta 5.2 va a haber que transformar respuestas únicas en respuestas múltiples con una sola opción
 - transformar respuestas abiertas en códigos
-- hay dos encuestas 52, ambas enviadas
-- 3 copias de 382, 2 de 340 y 2 de 709, son duplicados idénticos.
