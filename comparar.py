@@ -255,5 +255,5 @@ for key in codigos.key.unique():
         row['numencuesta'], row['cargadorx'], key)
       )
 
-# código {} inválido
-# no permitir más de un 99 en lista abierta
+# incorporar checkpoints a pregunta principal
+# incluir detección de duplicados
