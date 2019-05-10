@@ -3,6 +3,14 @@ import json
 import pandas as pd
 import pdb
 
+def str2int(value):
+  if isinstance(value, str):
+    try:
+      value = int(value)
+    except ValueError:
+      pass
+  return value
+
 with open('encuesta.json') as filein:
   encuesta = json.load(filein)
 
@@ -27,11 +35,20 @@ set([component['type'] for component in lista_components])
 pregunta_types = ['button', 'checkbox', 'number', 'radio', 'select', 'survey', 'textfield']
 preguntas = [component for component in lista_components if component['type'] in pregunta_types]
 columns = []
+required = {}
 for pregunta in preguntas:
+  if pregunta['key'] == 'consultaEspacioOrden':
+    pregunta_required = True
+  elif 'validate' in pregunta:
+    pregunta_required = pregunta['validate']['required']
+  else:
+    pregunta_required = False
   if pregunta['type'] == 'survey':
     for question in pregunta['questions']:
+      required['{}.{}'.format(pregunta['key'], question['value'])] = pregunta_required
       columns.append('{}.{}'.format(pregunta['key'], question['value']))
   else:
+    required[pregunta['key']] = pregunta_required
     columns.append(pregunta['key'])
 
 ###
@@ -41,7 +58,9 @@ with open('data/20190507_0239.json') as filein:
 
 data_json = []
 for submission in json_in:
-  data_json.append(submission['data'])
+  datum = submission['data']
+  if ('enviar' in datum) and datum['enviar']:
+    data_json.append(datum)
 
 parents = {}
 for datum in data_json:
@@ -73,26 +92,51 @@ for datum in data_json:
   json_new.append(datum_new)
 data_json = json_new
 
-# if required and None: 'No corresponde', recorrer listas
+# flatten json
+json_new = []
+for datum in data_json:
+  datum_new = {}
+  for datum_key, datum_value in datum.items():
+    if isinstance(datum_value, dict):
+      for dict_key, dict_value in datum_value.items():
+        datum_new['{}.{}'.format(datum_key, dict_key)] = dict_value
+    else:
+      value_new = datum_value
+      datum_new[datum_key] = value_new
+  json_new.append(datum_new)
+data_json = json_new
+
+# if required and '': 'No corresponde', recorrer listas
 json_new = []
 values = set()
 for datum in data_json:
   datum_new = {}
-  for pregunta in preguntas:
-    if pregunta['key'] in datum:
-      respuesta = datum[pregunta['key']]
-      if isinstance(respuesta, list):
-        # respuesta_new = []
-        for value in respuesta:
-          values.add(value)
-      elif not isinstance(respuesta, dict):
-        # pending normalize before
-        value = respuesta
-        values.add(value)
-pdb.set_trace()
+  for key, is_required in required.items():
+    if key in datum:
+      datum_value = datum[key]
+      if isinstance(datum_value, list):
+        value_new = []
+        for list_value in datum_value:
+          if (list_value in ['', None]) and is_required:
+            list_value = 'No corresponde'
+          list_value = str2int(list_value)
+          value_new.append(list_value)
+          values.add(list_value)
+      else:
+        if (datum_value in ['', None]) and is_required:
+          datum_value = 'No corresponde'
+        value_new = str2int(datum_value)
+        values.add(value_new)
+      datum_new[key] = value_new
+    else:
+      datum_new[key] = 'No corresponde'
+  json_new.append(datum_new)
+data_json = json_new
 
-data_json = pd.io.json.json_normalize(data_json)  # así como está sólo desagrega subitems de survey
-# del json_in, json_out
+data_json = pd.read_json(json.dumps(data_json))
+# data_json = pd.io.json.json_normalize(data_json)  # así como está sólo desagrega subitems de survey
+data_json = data_json.reindex(labels=columns, axis='columns')
+data_json.to_csv('data/out.csv')
 
 ###
 
@@ -117,7 +161,7 @@ print([column for column in columns if column not in data_csv.columns])
 print('columns in json not in csv:')
 print([column for column in data_json.columns if column not in data_csv.columns])
 
-print('columns in json (enviado) not in csv:')
+print('columns in json[enviar] not in csv:')
 data_json_enviado = data_json[~data_json.enviar.isna()].dropna(axis='columns', how='all')
 print([column for column in data_json_enviado.columns if column not in data_csv.columns])
 # sólo sobra columna violentxs.6 si descarto encuestas sin enviar
@@ -125,5 +169,7 @@ print([column for column in data_json_enviado.columns if column not in data_csv.
 print('columns in csv not in json:')
 print([column for column in data_csv.columns if column not in data_json.columns])
 
-# ordenar preguntas según orden encuesta
-
+# mover código de parse acá
+# consultaEspacioCual_3
+# fixMultiple
+# código {} inválido

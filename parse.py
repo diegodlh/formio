@@ -25,10 +25,14 @@ for _, df in pd.read_excel('manual_codigos.xlsx', sheet_name=None).items():
       codigos = codigos.append(df, ignore_index=True)
 # codigos.value = codigos.value.astype(int)
 
-data = pd.read_csv('data/20190508.csv')
+data = pd.read_csv(
+  'data/20190508.csv',
+  keep_default_na=False,
+  dtype='str'
+)
 
 # mejorar filtro de encuestas sin enviar
-data = data[~data.numencuesta.isin(['95','91','2',None])].reset_index(drop=True).copy()
+data = data[~data.numencuesta.isin(['95','91','2',''])].reset_index(drop=True).copy()
 
 columns_new = []
 for column in data.columns:
@@ -41,18 +45,64 @@ for column in data.columns:
   columns_new.append(column)
 data.columns = columns_new
 
-# ojo! no puedo aplicar a todas las columnas! pierdo al menos nro de encuesta
-data = data.apply(lambda x: x.str.replace('"','').str.split(','), axis=1)
+
+def splitCell(series):
+  if series.dtype == 'object':
+    return series.str.replace('"', '').str.split(',')
+  else:
+    return series
+
+data = data.apply(splitCell)
+
+
+def fixConsultaEspacioCual(row):
+  consultaEspacio = np.array(row.consultaEspacio)
+  consultaEspacioCual = np.array(row.consultaEspacioCual)
+  row.consultaEspacioCual_3 = list(np.where(consultaEspacio=='3',consultaEspacioCual,''))
+  row.consultaEspacioCual_7 = list(np.where(consultaEspacio=='7',consultaEspacioCual,''))
+  return row
 
 data['consultaEspacioCual_3'] = data['consultaEspacioCual']
 data['consultaEspacioCual_7'] = data['consultaEspacioCual']
+
+data = data.apply(fixConsultaEspacioCual, axis=1)
 data = data.drop('consultaEspacioCual', axis='columns')
-# terminar: quitar valores de la lista que no correspondan
 
+def fixMultiple(row):
+  remuneradaNombre = row.remuneradaNombre
+  remuneradaNombre_new = []
+  for i, value in enumerate(remuneradaNombre):
+    if value != '99':
+      try:
+        value_new = str(int(value) + (i+1)*100)
+      except:
+        value_new = value
+    else:
+      value_new = value
+    remuneradaNombre_new.append(value_new)
+  row.remuneradaNombre = remuneradaNombre_new
 
+  def add(list, increment):
+    list_new = []
+    for value in list:
+      if value != '99':
+        try:
+          value_new = str(int(value) + int(increment))
+        except:
+          value_new = value
+      else:
+        value_new = value
+      list_new.append(value_new)
+    return list_new
 
-# remuneradaNombre (+100, etc)
-# 8.1.1, 8.2.1, 8.3.1, 8.4.1
+  row.conoceOrgaCual = add(row.conoceOrgaCual, 100)
+  row.participaOrgaCual = add(row.participaOrgaCual, 100)
+  row.conoceProgramaCual = add(row.conoceProgramaCual, 100)
+  row.participaProgramaCual = add(row.participaProgramaCual, 100)
+  return row
+
+data = data.apply(fixMultiple, axis=1)
+pdb.set_trace()
 
 for key in codigos.key.unique():
   for _, row in data.iterrows():
@@ -71,10 +121,10 @@ for key in codigos.key.unique():
         # tengo que filtrar por 99 inválido
         if not value in set(codigos[codigos.key == key].value):
           # pdb.set_trace()
-          print('numencuesta {}, {}: código {:g} inválido!'.format(
-            row['numencuesta'], key, value)
+          print('numencuesta {} ({}), {}: código {:g} inválido!'.format(
+            row['numencuesta'][0], row['cargadorx'][0], key, value)
           )
       except:
         print('numencuesta {}, {}: código {} inválido!'.format(
-          row['numencuesta'], key, value)
+          row['numencuesta'][0], key, value)
         )
