@@ -2,6 +2,7 @@
 import json
 import pandas as pd
 import pdb
+import numpy as np
 
 def str2int(value):
   if isinstance(value, str):
@@ -136,6 +137,61 @@ data_json = json_new
 data_json = pd.read_json(json.dumps(data_json))
 # data_json = pd.io.json.json_normalize(data_json)  # así como está sólo desagrega subitems de survey
 data_json = data_json.reindex(labels=columns, axis='columns')
+
+def fixConsultaEspacioCual(row):
+  def where(list_a,list_b,target,if_false):
+    list_new = []
+    for i, value in enumerate(list_a):
+      if value == target:
+        list_new.append(list_b[i])
+      else:
+        list_new.append(if_false)
+    return list_new
+  if isinstance(row.consultaEspacio, list):
+    row.consultaEspacioCual_3 = where(row.consultaEspacio, row.consultaEspacioCual, 3, 'No corresponde')
+    row.consultaEspacioCual_7 = where(row.consultaEspacio, row.consultaEspacioCual, 7, 'No corresponde')
+  return row
+data_json.insert(
+  data_json.columns.get_loc('consultaEspacioCual'),
+  'consultaEspacioCual_3',
+  data_json['consultaEspacioCual']
+)
+data_json.insert(
+  data_json.columns.get_loc('consultaEspacioCual'),
+  'consultaEspacioCual_7',
+  data_json['consultaEspacioCual']
+)
+data_json = data_json.apply(fixConsultaEspacioCual, axis=1)
+data_json = data_json.drop('consultaEspacioCual', axis='columns')
+
+def fixMultiple(row):
+  remuneradaNombre = row.remuneradaNombre
+  if isinstance(remuneradaNombre, list):
+    remuneradaNombre_new = []
+    for i, value in enumerate(remuneradaNombre):
+      if isinstance(value, int) and value < 99:
+        value += (i+1)*100
+      remuneradaNombre_new.append(value)
+    row.remuneradaNombre = remuneradaNombre_new
+
+  def add(lista, increment):
+    if isinstance(lista, list):
+      lista_new = []
+      for value in lista:
+        if isinstance(value, int) and value < 99:
+          value += increment
+        lista_new.append(value)
+    else:
+      lista_new = lista
+    return lista_new
+  row.conoceOrgaCual = add(row.conoceOrgaCual, 100)
+  row.participaOrgaCual = add(row.participaOrgaCual, 200)
+  row.conoceProgramaCual = add(row.conoceProgramaCual, 100)
+  row.participaProgramaCual = add(row.participaProgramaCual, 200)
+  return row
+
+data_json = data_json.apply(fixMultiple, axis=1)
+
 data_json.to_csv('data/out.csv')
 
 ###
@@ -169,7 +225,30 @@ print([column for column in data_json_enviado.columns if column not in data_csv.
 print('columns in csv not in json:')
 print([column for column in data_csv.columns if column not in data_json.columns])
 
-# mover código de parse acá
-# consultaEspacioCual_3
-# fixMultiple
+
+codigos = pd.DataFrame()
+for _, df in pd.read_excel('manual_codigos.xlsx', sheet_name=None).items():
+  keys = df.columns[0]
+  if keys:
+    try:
+      df.columns = ['value', 'label']
+    except:
+      pdb.set_trace()
+    for key in keys.split(','):
+      df['key'] = key
+      codigos = codigos.append(df, ignore_index=True)
+for key in codigos.key.unique():
+  for _, row in data_json.iterrows():
+    cell = row[key]
+    if type(cell) is not list:
+      cell = [cell]
+    for value in cell:
+      if value == 'No corresponde':
+        continue
+      if not value in set(codigos[codigos.key == key].value):
+        print('numencuesta {} ({}), {}: código {} inválido!'.format(
+          row['numencuesta'], row['cargadorx'], key, value)
+        )
+
 # código {} inválido
+# no permitir más de un 99 en lista abierta
