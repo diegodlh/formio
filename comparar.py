@@ -249,6 +249,11 @@ for key in codigos.key.unique():
         print('numencuesta {} ({}), {}: código {} inválido!'.format(
           row['numencuesta'], row['cargadorx'], key, value)
         )
+    if (99 in cell) and len(cell) > 1:
+      # mejorar: es correcto 99 y otras opciones en distintas filas de un datagrid
+      print('numencuesta {} ({}), {}: indica 99 y otras opciones!'.format(
+        row['numencuesta'], row['cargadorx'], key)
+      )
 
 # código {} inválido
 # no permitir más de un 99 en lista abierta
