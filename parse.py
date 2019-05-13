@@ -333,10 +333,11 @@ for column in data_json.columns:
     column = column[-1]
     anidadas.append(column)
   columns_new.append(column)
-data_json.columns = columns_new
+data_desanidada = data_json.copy()
+data_desanidada.columns = columns_new
 
 for key in codigos.key.unique():
-  for _, row in data_json.iterrows():
+  for _, row in data_desanidada.iterrows():
     cell = row[key]
     if type(cell) is not list:
       cell = [cell]
