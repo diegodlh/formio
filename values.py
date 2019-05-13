@@ -56,7 +56,8 @@ def get_values(component, codigos):
         ['value', 'label']
       ].to_dict(orient='records')
     else:
-      print(component['key'])
+      pass
+      # print('number/textfield sin manual de códigos: ' + component['key'])
   elif component['type'] in ['button', 'checkbox']:
     pass
   # pdb.set_trace()
@@ -129,6 +130,9 @@ for pregunta in preguntas:
         if len(pregunta['components']) > 1:
           hija_key = component['key']
           hija_label = component['label']
+        else:
+          pregunta['key'] = component['key']
+          pregunta['label'] = component['label']
         value = Value(component['type'], pregunta['key'], pregunta['label'], hija_key, hija_label, value['value'], value['label']).as_dict()
         values.append(value)
   else:
