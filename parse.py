@@ -155,7 +155,6 @@ data_json = json_new
 
 # if required and '' or None: 'No corresponde'; recorrer listas
 json_new = []
-values = set()
 for datum in data_json:
   datum_new = {}
   for key, is_required in required.items():
@@ -172,12 +171,10 @@ for datum in data_json:
             list_value = 'No corresponde'
           list_value = str2int(list_value)
           value_new.append(list_value)
-          values.add(list_value)
       else:
         if (datum_value in ['', None]) and is_required:
           datum_value = 'No corresponde'
         value_new = str2int(datum_value)
-        values.add(value_new)
       datum_new[key] = value_new
     else:
       datum_new[key] = 'No corresponde'
@@ -252,49 +249,47 @@ data_json = data_json.reindex(labels=columns, axis='columns')
 
 ###
 
-data_csv = pd.read_csv('data/20190507_0239.csv')
-columns_new = []
-for column in data_csv.columns:
-  column = column.split('.')
-  try:
-    int(column[-1])
-    column = '.'.join(column[-2:])
-  except ValueError:
-    if len(column) > 1:
-      if not column[-2] in campo_unico:
-        column = '.'.join(column[-2:])
-      else:
-        column = column[-1]
-    else:     
-      column = column[-1]
-  columns_new.append(column)
-data_csv.columns = columns_new
+# data_csv = pd.read_csv('data/20190507_0239.csv')
+# columns_new = []
+# for column in data_csv.columns:
+#   column = column.split('.')
+#   try:
+#     int(column[-1])
+#     column = '.'.join(column[-2:])
+#   except ValueError:
+#     if len(column) > 1:
+#       if not column[-2] in campo_unico:
+#         column = '.'.join(column[-2:])
+#       else:
+#         column = column[-1]
+#     else:     
+#       column = column[-1]
+#   columns_new.append(column)
+# data_csv.columns = columns_new
 
-###
+# ###
 
-print('column in encuesta not in csv')
-print([column for column in columns if column not in data_csv.columns])
-# sólo draft y enviar están en encuesta pero no en csv
+# print('column in encuesta not in csv')
+# print([column for column in columns if column not in data_csv.columns])
+# # sólo draft y enviar están en encuesta pero no en csv
 
-print('columns in json not in csv:')
-print([column for column in data_json.columns if column not in data_csv.columns])
+# print('columns in json not in csv:')
+# print([column for column in data_json.columns if column not in data_csv.columns])
 
-print('columns in json[enviar] not in csv:')
-data_json_enviado = data_json[~data_json.enviar.isna()].dropna(axis='columns', how='all')
-print([column for column in data_json_enviado.columns if column not in data_csv.columns])
-# sólo sobra columna violentxs.6 si descarto encuestas sin enviar
+# print('columns in json[enviar] not in csv:')
+# data_json_enviado = data_json[~data_json.enviar.isna()].dropna(axis='columns', how='all')
+# print([column for column in data_json_enviado.columns if column not in data_csv.columns])
+# # sólo sobra columna violentxs.6 si descarto encuestas sin enviar
 
-print('columns in csv not in json:')
-print([column for column in data_csv.columns if column not in data_json.columns])
+# print('columns in csv not in json:')
+# print([column for column in data_csv.columns if column not in data_json.columns])
 
-###
+# ###
 
 fusionarNS = ['residenciaPartido', 'residenciaCiudad', 'nacimientoPais', 'nacimientoProvincia', 'nacimientoPartido', 'nacimientoCiudad']
 for key in fusionarNS:
   data_json.loc[data_json[key+'NS'] == True, key] = 99
   data_json = data_json.drop(key+'NS', axis='columns')
-
-data_json.to_csv('data.csv', index=False)
 
 ###
 dups = list(data_json.loc[data_json.numencuesta.duplicated(), 'numencuesta'])
@@ -310,48 +305,66 @@ for dup in dups:
 
 ###
 
-codigos = pd.DataFrame()
-for _, df in pd.read_excel('manual_codigos.xlsx', sheet_name=None).items():
-  keys = df.columns[0]
-  if keys:
-    try:
-      df.columns = ['value', 'label']
-    except:
-      pdb.set_trace()
-    for key in keys.split(','):
-      df['key'] = key
-      codigos = codigos.append(df, ignore_index=True)
+values = pd.read_excel('values.xlsx')
 
-anidadas = []
-columns_new = []
-for column in data_json.columns:
-  column = column.split('.')
-  try:
-    int(column[-1])
-    column = '.'.join(column[-2:])
-  except ValueError:
-    column = column[-1]
-    anidadas.append(column)
-  columns_new.append(column)
-data_desanidada = data_json.copy()
-data_desanidada.columns = columns_new
 
-for key in codigos.key.unique():
-  for _, row in data_desanidada.iterrows():
-    cell = row[key]
-    if type(cell) is not list:
-      cell = [cell]
-    for value in cell:
-      if value == 'No corresponde':
-        continue
-      if not value in set(codigos[codigos.key == key].value):
-        print('numencuesta {} ({}), {}: código {} inválido!'.format(
-          row['numencuesta'], row['cargadorx'], key, value)
-        )
-    if (99 in cell) and (len(cell) > 1) and (not key in anidadas):
-      print('numencuesta {} ({}), {}: indica 99 y otras opciones!'.format(
-        row['numencuesta'], row['cargadorx'], key)
-      )
+def value2label(value, columna, numencuesta):
+    if value != 'No corresponde':
+      labels = values.loc[(values['columna'] == columna) & (values['value'] == value), 'label'].to_list()
+      if len(labels) == 1:
+        value_new = labels[0]
+      elif len(labels) > 1:
+        print('Enc. {}: más de un código {} para {}'.format(numencuesta, value, columna))
+        value_new = value
+      elif len(labels) == 0:
+        print('Enc. {}: sin código {} para {}'.format(numencuesta, value, columna))
+        value_new = value
+    else:
+      value_new = value
+    return value_new
 
-# incorporar checkpoints a pregunta principal
-# incluir detección de duplicados
+
+def celda2labels(celda, columna, numencuesta):
+    if ((values['columna'] == columna) & (~values['value'].isna())).sum() > 0:
+      if isinstance(celda, list):
+        if (99 in celda) and (len(celda) > 1) and ('.' not in columna):
+          print('Enc. {}, {}: indica 99 y otras opciones'.format(numencuesta, columna))
+        celda_new = []
+        for value in celda:
+          value_new = value2label(value, columna, numencuesta)
+          celda_new.append(value_new)
+      else:
+        celda_new = value2label(celda, columna, numencuesta)
+    else:
+      celda_new = celda
+    return celda_new
+
+
+def row2labels(row):
+  numencuesta = row['numencuesta']
+  for columna, celda in row.iteritems():
+    row[columna] = celda2labels(celda, columna, numencuesta)
+  return row
+
+
+data_json = data_json.apply(row2labels, axis=1)
+
+
+# for columna in values['columna'].unique():
+#   for _, row in data_json.iterrows():
+#     cell = row[columna]
+#     if type(cell) is not list:
+#       cell = [cell]
+#     for value in cell:
+#       if value == 'No corresponde':
+#         continue
+#       if not value in set(codigos[codigos.key == key].value):
+#         print('numencuesta {} ({}), {}: código {} inválido!'.format(
+#           row['numencuesta'], row['cargadorx'], key, value)
+#         )
+#     if (99 in cell) and (len(cell) > 1) and (not key in anidadas):
+#       print('numencuesta {} ({}), {}: indica 99 y otras opciones!'.format(
+#         row['numencuesta'], row['cargadorx'], key)
+#       )
+
+data_json.to_csv('data.csv', index=False)
