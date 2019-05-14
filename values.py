@@ -12,6 +12,10 @@ class Value:
     self.hija_label = hija_label
     self.value = value
     self.label = label
+    try:
+      self.value = int(value)
+    except:
+      pass
 
   def as_dict(self):
     value = {
@@ -142,4 +146,4 @@ for pregunta in preguntas:
 
 values = pd.DataFrame(values, columns=['tipo', 'madre_key', 'madre_label', 'hija_key', 'hija_label', 'columna', 'value', 'label'])
 values['columna'] = values.apply(lambda x: '.'.join(filter(None, (x['madre_key'], x['hija_key']))), axis=1)
-values.to_excel('values.xlsx')
+values.to_excel('values.xlsx', index=False)
