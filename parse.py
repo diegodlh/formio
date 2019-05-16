@@ -309,35 +309,35 @@ values = pd.read_excel('values.xlsx')
 
 
 def value2label(value, columna, numencuesta):
-    if value != 'No corresponde':
-      labels = values.loc[(values['columna'] == columna) & (values['value'] == value), 'label'].to_list()
-      if len(labels) == 1:
-        value_new = labels[0]
-      elif len(labels) > 1:
-        print('Enc. {}: más de un código {} para {}'.format(numencuesta, value, columna))
-        value_new = value
-      elif len(labels) == 0:
-        print('Enc. {}: sin código {} para {}'.format(numencuesta, value, columna))
-        value_new = value
-    else:
+  if value != 'No corresponde':
+    labels = values.loc[(values['columna'] == columna) & (values['value'] == value), 'label'].to_list()
+    if len(labels) == 1:
+      value_new = labels[0]
+    elif len(labels) > 1:
+      print('Enc. {}: más de un código {} para {}'.format(numencuesta, value, columna))
       value_new = value
-    return value_new
+    elif len(labels) == 0:
+      print('Enc. {}: sin código {} para {}'.format(numencuesta, value, columna))
+      value_new = value
+  else:
+    value_new = value
+  return value_new
 
 
 def celda2labels(celda, columna, numencuesta):
-    if ((values['columna'] == columna) & (~values['value'].isna())).sum() > 0:
-      if isinstance(celda, list):
-        if (99 in celda) and (len(celda) > 1) and ('.' not in columna):
-          print('Enc. {}, {}: indica 99 y otras opciones'.format(numencuesta, columna))
-        celda_new = []
-        for value in celda:
-          value_new = value2label(value, columna, numencuesta)
-          celda_new.append(value_new)
-      else:
-        celda_new = value2label(celda, columna, numencuesta)
+  if ((values['columna'] == columna) & (~values['value'].isna())).sum() > 0:
+    if isinstance(celda, list):
+      if (99 in celda) and (len(celda) > 1) and ('.' not in columna):
+        print('Enc. {}, {}: indica 99 y otras opciones'.format(numencuesta, columna))
+      celda_new = []
+      for value in celda:
+        value_new = value2label(value, columna, numencuesta)
+        celda_new.append(value_new)
     else:
-      celda_new = celda
-    return celda_new
+      celda_new = value2label(celda, columna, numencuesta)
+  else:
+    celda_new = celda
+  return celda_new
 
 
 def row2labels(row):
